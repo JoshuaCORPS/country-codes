@@ -10,6 +10,7 @@ import CardMedia from "@material-ui/core/CardMedia";
 import CardContent from "@material-ui/core/CardContent";
 import CardActions from "@material-ui/core/CardActions";
 import Typography from "@material-ui/core/Typography";
+import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import LanguageIcon from "@material-ui/icons/Language";
 import RoomIcon from "@material-ui/icons/Room";
@@ -40,9 +41,21 @@ const useStyles = makeStyles({
 
 function Home() {
   const classes = useStyles();
+  const [filterDisplay, setFilterDisplay] = useState([]);
   const [loading, setLoading] = useState(true);
   const [countries, setCountries] = useState([]);
 
+  const inputChangeHandler = (e) => {
+    const word = e.target.value;
+    const reg = new RegExp(`\\b${word}`, "i");
+
+    if (word !== "") {
+      const newList = countries.filter((country) => reg.test(country.name));
+      setFilterDisplay(newList);
+    } else {
+      setFilterDisplay(countries);
+    }
+  };
   useEffect(() => {
     let updateState = true;
 
@@ -54,6 +67,7 @@ function Home() {
 
         if (updateState) {
           setCountries(countriesData.data);
+          setFilterDisplay(countriesData.data);
           setLoading(false);
         }
       };
@@ -68,7 +82,7 @@ function Home() {
     };
   }, []);
 
-  const countryCard = countries.map((country) => {
+  const countryCard = filterDisplay.map((country) => {
     return (
       <Grid item sm={12} md={4} key={country.alpha3Code}>
         <Link to={`${country.name.split(" ").join("")}`}>
@@ -161,6 +175,15 @@ function Home() {
       >
         Country Codes
       </Typography>
+      <TextField
+        id="outlined-basic"
+        label="Search..."
+        variant="outlined"
+        fullWidth
+        style={{ marginBottom: "20px" }}
+        onChange={inputChangeHandler}
+        // value={input}
+      />
       <Grid container spacing={3}>
         {content}
       </Grid>
