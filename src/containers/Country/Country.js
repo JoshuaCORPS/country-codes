@@ -1,30 +1,51 @@
 import React, { useState, useEffect } from "react";
 import { withRouter } from "react-router-dom";
+import { getLocalTime } from "../../assets/util/getLocalTime";
+import { makeStyles } from "@material-ui/core/styles";
+import Container from "@material-ui/core/Container";
+import Grid from "@material-ui/core/Grid";
+import Typography from "@material-ui/core/Typography";
+import Divider from "@material-ui/core/Divider";
+import ReactMapGL from "react-map-gl";
 import axios from "axios";
+import Table from "../../components/Table/Table";
+import CountryInfos from "../../components/CountryInfos/CountryInfos";
+import CountryFlag from "../../components/CountryInfos/CountryFlag/CountryFlag";
+
+const useStyles = makeStyles({
+  containerMargin: {
+    marginTop: "20px",
+  },
+  country: {
+    fontFamily: "Archivo Black, sans-serif",
+    textAlign: "center",
+  },
+  divderMargin: {
+    margin: "10px 0",
+  },
+  map: {
+    display: "flex",
+    justifyContent: "center",
+  },
+});
 
 const Country = (props) => {
+  const classes = useStyles();
   const [country, setCountry] = useState({});
   const [time, setTime] = useState("");
+  const [viewport, setViewport] = useState({
+    width: "100vw",
+    height: "500px",
+    zoom: 4.5,
+  });
 
-  const getLocalTime = (off) => {
-    const convertedOffset = off.split("UTC")[1].split(":");
-
-    const d = new Date();
-    const localTime = d.getTime();
-    const localOffset = d.getTimezoneOffset() * 60000;
-    const utc = localTime + localOffset;
-    const offset = parseFloat(convertedOffset);
-
-    const time = utc + 3600000 * offset;
-
-    const countryLocalTime = new Date(time).toLocaleTimeString();
-
-    return countryLocalTime;
+  const timer = (utc) => {
+    setTime(getLocalTime(utc, "time"));
   };
 
   useEffect(() => {
     let updateState = true;
-
+    let tick;
     try {
       const getCountryData = async () => {
         const countryData = await axios.get(
@@ -38,11 +59,10 @@ const Country = (props) => {
             countryObj = { ...country };
           }
         }
-        const time = getLocalTime(countryObj.timezones[0]);
 
         if (updateState) {
           setCountry(countryObj);
-          setTime(time);
+          tick = setInterval(() => timer(countryObj.timezones[0]), 1000);
         }
       };
 
@@ -53,14 +73,61 @@ const Country = (props) => {
 
     return () => {
       updateState = false;
+      clearInterval(tick);
     };
-  }, [props.match.params.cc, country]);
+  }, [props.match.params.cc, time]);
 
   return (
-    <div>
-      <h1>{`${country.name}`}</h1>
-      <h1>{time}</h1>
-    </div>
+    <Container className={classes.containerMargin}>
+      <Grid container spacing={3} alignItems="center">
+        <Grid item xs={12}>
+          <CountryFlag flag={country.flag} name={country.name} />
+        </Grid>
+
+        <Grid item xs={12}>
+          <Typography variant="h4" className={classes.country}>
+            {country.name &&
+              `${country.name.toUpperCase()} (${country.alpha2Code})`}
+          </Typography>
+        </Grid>
+
+        <Grid item xs={12} sm={4}>
+          <Typography variant="h4">Info</Typography>
+          <Divider className={classes.divderMargin} />
+
+          <CountryInfos
+            region={country.region}
+            capital={country.capital}
+            population={country.population}
+            currencies={country.currencies}
+          />
+
+          <Divider className={classes.divderMargin} />
+        </Grid>
+
+        <Grid item xs={12} sm={8}>
+          <Table
+            date={
+              country.timezones && getLocalTime(country.timezones[0], "date")
+            }
+            time={time}
+            timezone={country.timezones && country.timezones[0]}
+            callingCode={country.callingCodes && country.callingCodes[0]}
+          />
+        </Grid>
+
+        <Grid item xs={12} className={classes.map}>
+          <ReactMapGL
+            {...viewport}
+            latitude={country.latlng && country.latlng[0]}
+            longitude={country.latlng && country.latlng[1]}
+            mapStyle="mapbox://styles/corps2433/ck7hasrw30xhe1ilvvzw0r891"
+            mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_TOKEN}
+            onViewportChange={setViewport}
+          />
+        </Grid>
+      </Grid>
+    </Container>
   );
 };
 
