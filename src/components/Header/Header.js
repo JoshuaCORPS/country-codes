@@ -19,7 +19,7 @@ function Header() {
   const classes = useStyles();
 
   return (
-    <AppBar position="static" className={classes.headerBGColor}>
+    <AppBar position="sticky" className={classes.headerBGColor}>
       <Container>
         <Toolbar variant="regular">
           <Link to="/">
