@@ -63,7 +63,7 @@ function Home() {
   }, []);
 
   const countryCard = filterDisplay.map((country) => {
-    return <CountryCard country={country} />;
+    return <CountryCard country={country} key={country.alpha3Code} />;
   });
 
   let content = countryCard;

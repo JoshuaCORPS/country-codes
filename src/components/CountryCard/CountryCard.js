@@ -37,7 +37,7 @@ const CountryCard = (props) => {
   const country = props.country;
 
   return (
-    <Grid item sm={12} md={4} key={country.alpha3Code}>
+    <Grid item sm={12} md={4}>
       <Link to={`${country.name.split(" ").join("")}`}>
         <Card>
           <CardActionArea>
