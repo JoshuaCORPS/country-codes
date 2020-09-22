@@ -20,8 +20,16 @@ const useStyles = makeStyles({
     fontFamily: "Archivo Black, sans-serif",
     textAlign: "center",
   },
+  infoFont: {
+    fontFamily: "Archivo Black, sans-serif",
+    color: "#fff",
+    margin: "20px",
+  },
   divderMargin: {
     margin: "10px 0",
+    border: 0,
+    borderTop: "1px solid #fb8c00",
+    padding: "0",
   },
   map: {
     display: "flex",
@@ -79,7 +87,7 @@ const Country = (props) => {
 
   return (
     <Container className={classes.containerMargin}>
-      <Grid container spacing={3} alignItems="center">
+      <Grid container spacing={3}>
         <Grid item xs={12}>
           <CountryFlag flag={country.flag} name={country.name} />
         </Grid>
@@ -92,7 +100,18 @@ const Country = (props) => {
         </Grid>
 
         <Grid item xs={12} sm={4}>
-          <Typography variant="h4">Info</Typography>
+          <div
+            style={{
+              width: "100%",
+              border: "1px solid #FB8C00",
+              backgroundColor: "#FB8C00",
+            }}
+          >
+            <Typography variant="h4" className={classes.infoFont}>
+              Info
+            </Typography>
+          </div>
+
           <Divider className={classes.divderMargin} />
 
           <CountryInfos

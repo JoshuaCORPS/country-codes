@@ -19,6 +19,11 @@ import CallIcon from "@material-ui/icons/Call";
 import Spinner from "../../components/Spinner/Spinner";
 
 const useStyles = makeStyles({
+  countryCode: {
+    fontFamily: "Archivo Black, sans-serif",
+    textAlign: "center",
+    marginBottom: "20px",
+  },
   containerMargin: {
     marginTop: "20px",
   },
@@ -168,11 +173,7 @@ function Home() {
 
   return (
     <Container className={classes.containerMargin}>
-      <Typography
-        variant="h4"
-        component="h1"
-        style={{ textAlign: "center", marginBottom: "20px" }}
-      >
+      <Typography variant="h4" component="h1" className={classes.countryCode}>
         Country Codes
       </Typography>
       <TextField

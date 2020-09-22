@@ -16,6 +16,7 @@ const useStyles = makeStyles({
     paddingLeft: "45px",
     fontSize: "20px",
     textTransform: "uppercase",
+    color: "#FB8C00",
   },
   alignIcons: {
     display: "flex",

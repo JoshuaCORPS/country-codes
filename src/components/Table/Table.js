@@ -7,16 +7,20 @@ import CallIcon from "@material-ui/icons/Call";
 
 const useStyles = makeStyles({
   icons: {
-    color: "#F75B00",
+    color: "#fff",
     paddingRight: "10px",
   },
   alignIcons: {
     display: "flex",
     alignItems: "center",
-    marginTop: "8px",
+    marginTop: "5px",
   },
   tableHeaderSize: {
-    fontSize: "15px",
+    fontSize: "20px",
+    fontFamily: "Archivo Black, sans-serif",
+  },
+  padding: {
+    padding: "20px 0",
   },
 });
 
@@ -57,7 +61,11 @@ const Table = ({ date, time, timezone, callingCode }) => {
             </Typography>
           </td>
           <td>
-            <Typography variant="h4" color="textPrimary">
+            <Typography
+              variant="h4"
+              color="textPrimary"
+              className={classes.padding}
+            >
               {timezone}
             </Typography>
           </td>
@@ -75,7 +83,11 @@ const Table = ({ date, time, timezone, callingCode }) => {
         </tr>
         <tr>
           <td>
-            <Typography variant="h4" color="textPrimary">
+            <Typography
+              variant="h4"
+              color="textPrimary"
+              className={classes.padding}
+            >
               + {callingCode}
             </Typography>
           </td>
