@@ -1,9 +1,12 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import axios from "axios";
 import { BrowserRouter } from "react-router-dom";
 import "./index.css";
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
+
+axios.defaults.baseURL = "https://restcountries.eu";
 
 const app = (
   <BrowserRouter>

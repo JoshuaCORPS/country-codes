@@ -56,9 +56,7 @@ const Country = (props) => {
     let tick;
     try {
       const getCountryData = async () => {
-        const countryData = await axios.get(
-          "https://restcountries.eu/rest/v2/all"
-        );
+        const countryData = await axios.get("/rest/v2/all");
 
         let countryObj = {};
 

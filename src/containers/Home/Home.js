@@ -41,9 +41,7 @@ function Home() {
 
     try {
       const getCountriesData = async () => {
-        const countriesData = await axios.get(
-          "https://restcountries.eu/rest/v2/all"
-        );
+        const countriesData = await axios.get("/rest/v2/all");
 
         if (updateState) {
           setCountries(countriesData.data);
