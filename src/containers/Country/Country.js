@@ -35,6 +35,11 @@ const useStyles = makeStyles({
     display: "flex",
     justifyContent: "center",
   },
+  info: {
+    width: "100%",
+    border: "1px solid #FB8C00",
+    backgroundColor: "#FB8C00",
+  },
 });
 
 const Country = (props) => {
@@ -98,13 +103,7 @@ const Country = (props) => {
         </Grid>
 
         <Grid item xs={12} sm={4}>
-          <div
-            style={{
-              width: "100%",
-              border: "1px solid #FB8C00",
-              backgroundColor: "#FB8C00",
-            }}
-          >
+          <div className={classes.info}>
             <Typography variant="h4" className={classes.infoFont}>
               Info
             </Typography>

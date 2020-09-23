@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
+import { Link } from "react-router-dom";
 import axios from "axios";
 import Grid from "@material-ui/core/Grid";
 import Container from "@material-ui/core/Container";
@@ -16,6 +17,9 @@ const useStyles = makeStyles({
   },
   containerMargin: {
     marginTop: "20px",
+  },
+  content: {
+    marginBottom: "20px",
   },
 });
 
@@ -61,7 +65,13 @@ function Home() {
   }, []);
 
   const countryCard = filterDisplay.map((country) => {
-    return <CountryCard country={country} key={country.alpha3Code} />;
+    return (
+      <Grid item sm={12} md={4} key={country.alpha3Code}>
+        <Link to={`${country.name.split(" ").join("")}`}>
+          <CountryCard country={country} />;
+        </Link>
+      </Grid>
+    );
   });
 
   let content = countryCard;
@@ -77,8 +87,8 @@ function Home() {
         label="Search..."
         variant="outlined"
         fullWidth
-        style={{ marginBottom: "20px" }}
         onChange={inputChangeHandler}
+        className={classes.content}
       />
       <Grid container spacing={3}>
         {content}
