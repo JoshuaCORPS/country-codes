@@ -52,11 +52,11 @@ const Table = ({ date, time, timezone, callingCode }) => {
         </tr>
         <tr>
           <td colSpan="2" rowSpan="3">
-            <Typography variant="subtitle1" color="textSecondary">
+            <Typography variant="subtitle1" color="textSecondary" id="date">
               {date}
             </Typography>
 
-            <Typography variant="h4" color="textPrimary">
+            <Typography variant="h4" color="textPrimary" id="time">
               {time}
             </Typography>
           </td>
@@ -65,6 +65,7 @@ const Table = ({ date, time, timezone, callingCode }) => {
               variant="h4"
               color="textPrimary"
               className={classes.padding}
+              id="timezone"
             >
               {timezone}
             </Typography>
@@ -87,6 +88,7 @@ const Table = ({ date, time, timezone, callingCode }) => {
               variant="h4"
               color="textPrimary"
               className={classes.padding}
+              id="callingcode"
             >
               + {callingCode}
             </Typography>

@@ -36,11 +36,15 @@ const CountryInfo = ({ Icon, title, value }) => {
         color="textSecondary"
         component="p"
       >
-        <Icon className={classes.icons} />
-        <span className={classes.icons__text}>{title}</span>
+        <Icon className={classes.icons} id="icon" />
+        <span className={classes.icons__text} id="title">
+          {title}
+        </span>
       </Typography>
       <Typography variant="inherit" color="textSecondary" component="p">
-        <span className={classes.icons__text__sub}>{value}</span>
+        <span className={classes.icons__text__sub} id="value">
+          {value}
+        </span>
       </Typography>
     </>
   );

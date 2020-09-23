@@ -1,5 +1,4 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import Card from "@material-ui/core/Card";
@@ -37,82 +36,80 @@ const CountryCard = (props) => {
   const country = props.country;
 
   return (
-    <Grid item sm={12} md={4}>
-      <Link to={`${country.name.split(" ").join("")}`}>
-        <Card>
-          <CardActionArea>
-            <CardMedia
-              image={country.flag}
-              title="country flag"
-              className={classes.cardMedia}
-            />
-            <CardContent>
-              <Grid container spacing={2}>
-                <Grid item xs={6}>
-                  <Typography
-                    className={classes.alignIcons}
-                    variant="subtitle1"
-                    color="textSecondary"
-                    component="p"
-                  >
-                    <LanguageIcon className={classes.icons} />
-                    <span className={classes.icons__text}>
-                      {`${country.name} (${country.alpha2Code})`}
-                    </span>
-                  </Typography>
-                </Grid>
-                <Grid item xs={6}>
-                  <Typography
-                    className={classes.alignIcons}
-                    variant="subtitle1"
-                    color="textSecondary"
-                    component="p"
-                  >
-                    <RoomIcon className={classes.icons} />
-                    <span className={classes.icons__text}>
-                      {country.region === "Americas"
-                        ? "America"
-                        : country.region}
-                    </span>
-                  </Typography>
-                </Grid>
-                <Grid item xs={6}>
-                  <Typography
-                    className={classes.alignIcons}
-                    variant="subtitle1"
-                    color="textSecondary"
-                    component="p"
-                  >
-                    <AccessTimeIcon className={classes.icons} />
-                    <span className={classes.icons__text}>
-                      {country.timezones[0]}
-                    </span>
-                  </Typography>
-                </Grid>
-                <Grid item xs={6}>
-                  <Typography
-                    className={classes.alignIcons}
-                    variant="subtitle1"
-                    color="textSecondary"
-                    component="p"
-                  >
-                    <CallIcon className={classes.icons} />
-                    <span
-                      className={classes.icons__text}
-                    >{`+ ${country.callingCodes[0]}`}</span>
-                  </Typography>
-                </Grid>
-              </Grid>
-            </CardContent>
-          </CardActionArea>
-          <CardActions style={{ display: "flex", justifyContent: "center" }}>
-            <Button fullWidth size="small" className={classes.icons}>
-              View More
-            </Button>
-          </CardActions>
-        </Card>
-      </Link>
-    </Grid>
+    <Card>
+      <CardActionArea>
+        <CardMedia
+          image={country.flag}
+          title="country flag"
+          className={classes.cardMedia}
+        />
+        <CardContent>
+          <Grid container spacing={2}>
+            <Grid item xs={6}>
+              <Typography
+                className={classes.alignIcons}
+                variant="subtitle1"
+                color="textSecondary"
+                component="p"
+                id="countryname"
+              >
+                <LanguageIcon className={classes.icons} />
+                <span className={classes.icons__text}>
+                  {`${country.name} (${country.alpha2Code})`}
+                </span>
+              </Typography>
+            </Grid>
+            <Grid item xs={6}>
+              <Typography
+                className={classes.alignIcons}
+                variant="subtitle1"
+                color="textSecondary"
+                component="p"
+                id="region"
+              >
+                <RoomIcon className={classes.icons} />
+                <span className={classes.icons__text}>
+                  {country.region === "Americas" ? "America" : country.region}
+                </span>
+              </Typography>
+            </Grid>
+            <Grid item xs={6}>
+              <Typography
+                className={classes.alignIcons}
+                variant="subtitle1"
+                color="textSecondary"
+                component="p"
+                id="timezone"
+              >
+                <AccessTimeIcon className={classes.icons} />
+                <span className={classes.icons__text}>
+                  {country.timezones[0]}
+                </span>
+              </Typography>
+            </Grid>
+            <Grid item xs={6}>
+              <Typography
+                className={classes.alignIcons}
+                variant="subtitle1"
+                color="textSecondary"
+                component="p"
+                id="callingcode"
+              >
+                <CallIcon className={classes.icons} />
+                <span
+                  className={classes.icons__text}
+                >{`+ ${country.callingCodes[0]}`}</span>
+              </Typography>
+            </Grid>
+          </Grid>
+        </CardContent>
+      </CardActionArea>
+      <CardActions style={{ display: "flex", justifyContent: "center" }}>
+        <Button fullWidth size="small" className={classes.icons}>
+          View More
+        </Button>
+      </CardActions>
+    </Card>
   );
 };
 
