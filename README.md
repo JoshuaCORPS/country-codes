@@ -1,3 +1,11 @@
-# How to run test
+# Country Code App
 
-- Just run 'npm run test' command
+Built using: React.js, Material-UI
+
+# About Country Code
+
+- Get countries specific timezone, calling code, local time, map and etc.
+
+# Visit Country Code App
+
+- https://countrycode.vercel.app/
