@@ -68,7 +68,7 @@ function Home() {
     return (
       <Grid item sm={12} md={4} key={country.alpha3Code}>
         <Link to={`${country.name.split(" ").join("")}`}>
-          <CountryCard country={country} />;
+          <CountryCard country={country} />
         </Link>
       </Grid>
     );
