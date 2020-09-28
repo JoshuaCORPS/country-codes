@@ -8,4 +8,4 @@ Built using: React.js, Material-UI
 
 # Visit Country Code App
 
-- https://countrycode.vercel.app/
+- https://countrycodes.vercel.app/
